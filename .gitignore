@@ -1,4 +1,59 @@
+# ---- Python ----
 __pycache__/
-*.pyc
-jobs.db
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spec
+
+# ---- Virtual Environments ----
 .venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ---- IDE & Editor Files ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+
+# ---- SQLite DB ----
+jobs.db
+
+# ---- Logs ----
+*.log
+*.out
+*.err
+
+# ---- Caches ----
+.cache/
+.mypy_cache/
+.pytest_cache/
+__pypackages__/
+
+# ---- Test & Coverage ----
+.coverage
+htmlcov/
+.tox/
+.nox/
+pytestdebug.log
+
+# ---- Jupyter / Notebooks ----
+.ipynb_checkpoints/
+
+# ---- Misc ----
+*.bak
+*.tmp
