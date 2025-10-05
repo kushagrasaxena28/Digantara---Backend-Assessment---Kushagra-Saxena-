@@ -5,14 +5,14 @@ from typing import List
 from app.db.session import get_db
 from app.db import crud
 from app.schemas.job import JobCreate, JobOut, JobUpdate
-from app.core.scheduler import start_scheduler, schedule_job, remove_job
+from app.scheduler.scheduler import start_scheduler, schedule_job, remove_job
 
 router = APIRouter(prefix="/jobs", tags=["jobs"])
 
 @router.post("/", response_model=JobOut, status_code=201)
 def create_job(job: JobCreate, db: Session = Depends(get_db)):
     new_job = crud.create_job(db, job)
-    sched = start_scheduler()
+    start_scheduler()
     schedule_job(new_job)
     return new_job
 
@@ -33,7 +33,7 @@ def update_job(job_id: int, job_update: JobUpdate, db: Session = Depends(get_db)
     if not updated:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    sched = start_scheduler()
+    start_scheduler()
     schedule_job(updated)   # re-schedule in APScheduler
     return updated
 

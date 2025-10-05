@@ -1,10 +1,8 @@
 from fastapi import FastAPI
-from app.api import ping, jobs   # 👈 include jobs router
-from app.core.config import settings
+from app.api import ping, jobs
 from app.db.session import Base, engine
-import app.db.models  # ensure Job model registered
-from app.core.scheduler import start_scheduler, schedule_job
-from app.db import crud, models
+from app.scheduler.scheduler import start_scheduler, schedule_job
+from app.db import models
 from app.db.session import SessionLocal
 import logging
 
@@ -17,8 +15,8 @@ logging.basicConfig(
 
 def create_app():
     app = FastAPI(
-        title=settings.PROJECT_NAME,
-        version=settings.VERSION,
+        title="Schedling Service",
+        version="0.1.0",
     )
 
     # include routers
@@ -30,7 +28,7 @@ def create_app():
         Base.metadata.create_all(bind=engine)
 
         # start scheduler
-        sched = start_scheduler()
+        start_scheduler()
 
         # re-schedule jobs already in DB
         db = SessionLocal()

@@ -17,7 +17,7 @@ def start_scheduler():
         return scheduler
     scheduler = BackgroundScheduler()
     scheduler.start()
-    logger.info("✅ APScheduler started")
+    logger.info("APScheduler started")
     return scheduler
 
 def schedule_job(job, db_session_factory=SessionLocal):
